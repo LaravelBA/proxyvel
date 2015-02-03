@@ -1,0 +1,29 @@
+{
+  "name": "guiwoda/proxyvel",
+  "description": "Service proxy for laravel's IoC container",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Guido Contreras Woda",
+      "email": "guiwoda@gmail.com"
+    }
+  ],
+  "require": {
+    "laravel/framework": "~4.2",
+    "ocramius/proxy-manager": "~1.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Proxyvel\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  }
+}
