@@ -13,10 +13,9 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->app = new Application(
-            new ProxyNamespace(['Tests\\Fixtures']),
-            new LazyLoadingValueHolderFactory()
-        );
+        $this->app = new Application;
+
+        $this->app->setProxyConfiguration(new ProxyNamespace(['Tests\\Fixtures']), new LazyLoadingValueHolderFactory());
     }
 
     /** @test */

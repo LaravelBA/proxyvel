@@ -63,7 +63,10 @@ variable with this package's `Application`:
 
 ```php
 // in bootstrap/start.php 
-$app = new Proxyvel\Application(
+$app = new Proxyvel\Application;
+
+// If you don't call this, the container will just defer to Laravel's default behavior
+$app->setProxyConfiguration(
     // Example Specification, build the one you need here
     new Proxyvel\Specifications\ProxyEverything,
     // Only instances of AbstractLazyFactory are accepted for now

@@ -12,18 +12,18 @@ class Container extends LaravelContainer
     private $proxySpecification;
 
     /**
-     * @type \ProxyManager\Factory\AbstractBaseFactory
+     * @type \ProxyManager\Factory\AbstractLazyFactory
      */
     private $proxyFactory;
 
     /**
-     * @param \Proxyvel\Contracts\ProxySpecification    $proxySpecification
+     * @param \Proxyvel\Contracts\ProxySpecification $proxySpecification
      * @param \ProxyManager\Factory\AbstractLazyFactory $proxyFactory
      */
-    public function __construct(ProxySpecification $proxySpecification, AbstractLazyFactory $proxyFactory)
+    public function setProxyConfiguration(ProxySpecification $proxySpecification, AbstractLazyFactory $proxyFactory)
     {
         $this->proxySpecification = $proxySpecification;
-        $this->proxyFactory       = $proxyFactory;
+        $this->proxyFactory = $proxyFactory;
     }
 
     /**
@@ -34,16 +34,26 @@ class Container extends LaravelContainer
      */
     public function make($abstract, $parameters = array())
     {
-        if ($this->proxySpecification->shouldProxy($abstract))
+        if (
+            ! $this->__validateProxyConfiguration() ||
+            ! $this->proxySpecification->shouldProxy($abstract)
+        )
         {
-            return $this->proxyFactory->createProxy($abstract, function(& $wrappedObject, $proxy, $method, $parameters, & $initializer) use ($abstract, $parameters){
-                $wrappedObject = parent::make($abstract, $parameters);
-                $initializer = null;
-
-                return true;
-            });
+            return parent::make($abstract, $parameters);
         }
 
-        return parent::make($abstract, $parameters);
+        return $this->proxyFactory->createProxy($abstract, function(& $wrappedObject, $proxy, $method, $parameters, & $initializer) use ($abstract, $parameters){
+            $wrappedObject = parent::make($abstract, $parameters);
+            $initializer = null;
+
+            return true;
+        });
+    }
+
+    private function __validateProxyConfiguration()
+    {
+        return
+            $this->proxySpecification instanceof ProxySpecification &&
+            $this->proxyFactory instanceof AbstractLazyFactory;
     }
 }

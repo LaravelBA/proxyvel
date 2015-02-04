@@ -13,10 +13,9 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->container = new Container(
-            new ProxyNamespace(['Tests\\Fixtures']),
-            new LazyLoadingValueHolderFactory()
-        );
+        $this->container = new Container;
+
+        $this->container->setProxyConfiguration(new ProxyNamespace(['Tests\\Fixtures']), new LazyLoadingValueHolderFactory());
     }
 
     /** @test */
