@@ -1,5 +1,5 @@
 # Proxyvel
-An implementation of [ProxyManager](http://github.com/ocramius/proxy-manager) for Laravel.
+An implementation of [ProxyManager](https://github.com/Ocramius/ProxyManager) for Laravel.
 
 ## Why?
 When you do intensive constructor injection, a lot of objects will be needed in order to create your application.
