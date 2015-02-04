@@ -10,10 +10,11 @@
     }
   ],
   "require": {
-    "laravel/framework": "~4.2",
+    "illuminate/container": "~4.2",
     "ocramius/proxy-manager": "~1.0"
   },
   "require-dev": {
+    "laravel/framework": "~4.2",
     "phpunit/phpunit": "~4.0"
   },
   "autoload": {
