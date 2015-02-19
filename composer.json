@@ -1,5 +1,5 @@
 {
-  "name": "guiwoda/proxyvel",
+  "name": "laravelba/proxyvel",
   "description": "Service proxy for laravel's IoC container",
   "minimum-stability": "stable",
   "license": "MIT",
