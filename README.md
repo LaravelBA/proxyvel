@@ -17,7 +17,7 @@ extends the `Illuminate\Container\Container` and that makes it hard to swap out.
 
 This package provides two extensions, namely of `Application` and `Container`. You probably won't need both.
 
-Also, this package provides a way to decide _what_ objects will be proxied by the IoC container, through the 
+Also, this package provides a way to decide _which_ objects will be proxied by the IoC container, through the 
 `Specification` pattern:
 
 ```php
